@@ -1,8 +1,10 @@
 package org.octans.project.entity.entity;
 
+import org.octans.project.util.Entity;
+
 import java.util.Date;
 
-public class User {
+public class User extends Entity {
     private Integer id;
 
     private String name;

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.octans.project.entity.dto.UserDTO;
 import org.octans.project.service.UserService;
 import org.octans.project.util.BeanMapper;
+import org.octans.project.util.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,11 @@ public class UserController {
 
     @ApiOperation(value = "用户获取", notes = "用户获取（用户条数）", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = RequestMethod.GET, value = "/getAll")
-    public UserDTO getAll(Integer id){
-        return BeanMapper.map(userService.getUser(id),UserDTO.class);
+    public JSONResult getAll(Integer id){
+        JSONResult<UserDTO> jsonResult = new JSONResult<>();
+        UserDTO userDTO = BeanMapper.map(userService.getUser(id),UserDTO.class);
+        // 设置返回数据
+        jsonResult.setData(userDTO);
+        return jsonResult;
     }
 }
