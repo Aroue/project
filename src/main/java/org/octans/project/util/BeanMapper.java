@@ -13,10 +13,14 @@ public class BeanMapper {
 
     private static Mapper MAPPER = DozerBeanMapperBuilder.buildDefault();
 
-    public static Mapper getMapper() {
+    public Mapper getMapper() {
         return MAPPER;
     }
 
+
+    /**
+     * 基于Dozer转换对象的类型.
+     */
     public static <T> T map(Object source, Class<T> destinationClass) {
         if (source == null) {
             return null;
@@ -24,6 +28,10 @@ public class BeanMapper {
         return MAPPER.map(source, destinationClass);
     }
 
+
+    /**
+     * 基于Dozer转换Collection中对象的类型.
+     */
     public static <T> List<T> mapList(Collection sourceList, Class<T> destinationClass) {
         List<T> destinationList = new ArrayList<>();
         for (Object sourceObject : sourceList) {
