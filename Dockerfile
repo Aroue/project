@@ -1,7 +1,7 @@
 FROM openjdk:8-jre
 MAINTAINER <blissleek@163.com>
-WORKDIR /app
-COPY ./target/project-0.0.1-SNAPSHOT.jar /app
+WORKDIR /project
+COPY ./target/*.jar /project
 EXPOSE 8080
 ENTRYPOINT ["sh", "-c"]
 CMD ["java -jar *.jar"]
