@@ -14,6 +14,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver   # mysql8 及其之后的版本驱动
 #    driver-class-name: com.mysql.jdbc.Driver # mysql8 之前的版本驱动
     type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      test-on-borrow: true
+#      test-while-idle: true
   flyway:
     validate-on-migrate: false
     locations: classpath:db/migration

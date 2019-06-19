@@ -3,7 +3,6 @@ package org.octans.project.util;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import sun.plugin2.message.Message;
 
 import java.util.List;
 import java.util.Map;
@@ -68,22 +67,9 @@ public class JSONResult<T> {
     /**
      * 设置 消息
      */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-
     public void setMessage(List<Map<String, Object>> errorList) {
         this.message = errorList;
     }
-
-    /**
-     * 设置 消息
-     */
-    public void setMessage(Message message) {
-        this.message = message.toString();
-    }
-
     /**
      * 返回 当前页
      */
