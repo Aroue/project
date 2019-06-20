@@ -8,9 +8,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     # 连接阿里云服务器mysql
-    url: jdbc:mysql://${MYSQL_URL:106.14.212.47:23306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+#    url: jdbc:mysql://${MYSQL_URL:106.14.212.47:23306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     # 连接本地 mysql 数据库
-#    url: jdbc:mysql://${MYSQL_URL:127.0.0.1:3306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://${MYSQL_URL:127.0.0.1:3306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     # 使用druid数据源
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASS:}
