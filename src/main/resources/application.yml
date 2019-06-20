@@ -9,16 +9,14 @@ spring:
   datasource:
     # 连接阿里云服务器mysql
     url: jdbc:mysql://${MYSQL_URL:106.14.212.47:23306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    # 连接本地 mysql 数据库
 #    url: jdbc:mysql://${MYSQL_URL:127.0.0.1:3306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     # 使用druid数据源
     username: ${MYSQL_USER:root}
-    password: ${MYSQL_PASS:root}
+    password: ${MYSQL_PASS:}
 #    driver-class-name: com.mysql.cj.jdbc.Driver   # mysql8 及其之后的版本驱动
     driver-class-name: com.mysql.jdbc.Driver # mysql8 之前的版本驱动
     type: com.alibaba.druid.pool.DruidDataSource
-#    druid:
-#      test-on-borrow: true
-#      test-while-idle: true
   flyway:
     validate-on-migrate: false
     locations: classpath:db/migration

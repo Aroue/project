@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = "userController", description = "userController | 用户相关API")
+@Api(tags = "userController | 用户相关API")
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
