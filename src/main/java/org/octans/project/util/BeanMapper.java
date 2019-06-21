@@ -13,7 +13,7 @@ public class BeanMapper {
 
     private static Mapper MAPPER = DozerBeanMapperBuilder.buildDefault();
 
-    public Mapper getMapper() {
+    public static Mapper getMapper() {
         return MAPPER;
     }
 

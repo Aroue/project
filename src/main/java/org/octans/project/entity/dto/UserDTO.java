@@ -1,10 +1,11 @@
 package org.octans.project.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.octans.project.util.dto.ResponseDTO;
 
 import java.util.Date;
 
-public class UserDTO {
+public class UserDTO  extends ResponseDTO {
     private Integer id;
 
     private String name;
