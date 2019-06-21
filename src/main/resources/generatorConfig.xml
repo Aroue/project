@@ -88,9 +88,29 @@
 <!--        <table tableName="%">-->
 <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
+<!--        <table tableName="project_user" domainObjectName="User" />-->
+<!--        <table tableName="project_dept" domainObjectName="Dept" />-->
+<!--        <table tableName="project_employee" domainObjectName="Employee" />-->
+<!--        <table tableName="project_notice" domainObjectName="Notice" />-->
         <table tableName="project_user" domainObjectName="User" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="project_dept" domainObjectName="Dept" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+        <table tableName="project_employee" domainObjectName="Employee" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+        <table tableName="project_notice" domainObjectName="Notice" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="project_job" domainObjectName="Job" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+
 
         <!--&lt;!&ndash;用来修改表中某个列的属性,一个table元素中可以有多个columnOverride元素哈.-->
         <!--property属性来指定列要生成的属性名称.-->

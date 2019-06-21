@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`
+DROP TABLE IF EXISTS `project_user`;
+CREATE TABLE `project_user`
 (
     `id`              int(11)      NOT NULL AUTO_INCREMENT,
     `login_name`      varchar(20)  NOT NULL COMMENT '登录名.',
@@ -14,8 +14,8 @@ CREATE TABLE `user`
 
 
 
-DROP TABLE IF EXISTS `dept`;
-CREATE TABLE `dept`
+DROP TABLE IF EXISTS `project_dept`;
+CREATE TABLE `project_dept`
 (
     `id`              int(11)      NOT NULL AUTO_INCREMENT,
     `name`            varchar(50)  NOT NULL COMMENT '部门名.',
@@ -24,8 +24,18 @@ CREATE TABLE `dept`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT ='部门表';
 
-DROP TABLE IF EXISTS `employee`;
-CREATE TABLE `employee`
+DROP TABLE IF EXISTS `project_job`;
+CREATE TABLE `project_job`
+(
+    `id`              int(11)      NOT NULL AUTO_INCREMENT,
+    `name`            varchar(50)  NOT NULL COMMENT '职位名.',
+    `remark`          varchar(300) NOT NULL COMMENT '详细信息.',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='职位表';
+
+DROP TABLE IF EXISTS `project_employee`;
+CREATE TABLE `project_employee`
 (
     `id`              int(11)      NOT NULL AUTO_INCREMENT,
     `dept_id`         int(11)      NOT NULL COMMENT '部门主键' ,
@@ -54,8 +64,8 @@ CREATE TABLE `employee`
 
 
 
-DROP TABLE IF EXISTS `notice`;
-CREATE TABLE `notice`
+DROP TABLE IF EXISTS `project_notice`;
+CREATE TABLE `project_notice`
 (
     `id`              int(11)      NOT NULL AUTO_INCREMENT,
     `user_id`         int(11)      NOT NULL COMMENT '公告人' ,

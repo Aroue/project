@@ -13,9 +13,9 @@ spring:
     url: jdbc:mysql://${MYSQL_URL:127.0.0.1:3306/${MYSQL_DATABASE:project}}?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     # 使用druid数据源
     username: ${MYSQL_USER:root}
-    password: ${MYSQL_PASS:}
-#    driver-class-name: com.mysql.cj.jdbc.Driver   # mysql8 及其之后的版本驱动
-    driver-class-name: com.mysql.jdbc.Driver # mysql8 之前的版本驱动
+    password: ${MYSQL_PASS:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver   # mysql8 及其之后的版本驱动
+#    driver-class-name: com.mysql.jdbc.Driver # mysql8 之前的版本驱动
     type: com.alibaba.druid.pool.DruidDataSource
   flyway:
     validate-on-migrate: false
