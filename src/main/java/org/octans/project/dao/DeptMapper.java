@@ -1,6 +1,9 @@
 package org.octans.project.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.octans.project.entity.entity.Dept;
+
+import java.util.List;
 
 public interface DeptMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface DeptMapper {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+
+    List<Dept> selectByQuery(@Param("name")String name);
 }

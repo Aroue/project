@@ -1,4 +1,4 @@
-package org.octans.project.entity.dto;
+package org.octans.project.entity.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.octans.project.util.dto.ResponseDTO;

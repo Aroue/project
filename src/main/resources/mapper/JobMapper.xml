@@ -22,9 +22,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.octans.project.entity.entity.Job">
-    insert into project_job (id, name, remark
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into project_job (name, remark
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+    values (#{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.octans.project.entity.entity.Job">
@@ -70,4 +73,14 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByQuery"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from project_job
+    <where>
+      <if test="name != null">
+        name LIKE concat('%',#{name},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

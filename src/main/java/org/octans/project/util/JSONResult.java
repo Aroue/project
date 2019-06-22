@@ -67,8 +67,8 @@ public class JSONResult<T> {
     /**
      * 设置 消息
      */
-    public void setMessage(List<Map<String, Object>> errorList) {
-        this.message = errorList;
+    public void setMessage(String  message) {
+        this.message = message;
     }
     /**
      * 返回 当前页

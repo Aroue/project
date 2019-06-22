@@ -26,6 +26,19 @@
       <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
+  <resultMap id="EmployeeResultMap" type="org.octans.project.entity.dto.employee.EmployeeA01DTO">
+      <id property="id" column="id"/>
+      <result column="name" property="name" />
+      <result column="job_name" property="jobName" />
+      <result column="dept_name" property="deptName" />
+      <result column="card_id" property="cardId" />
+      <result column="address" property="address" />
+      <result column="phone" property="phone" />
+      <result column="email" property="email" />
+      <result column="sex" property="sex" />
+      <result column="education" property="education"/>
+      <result column="created_at" property="createdAt" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, dept_id, job_id, name, card_id, address, post_code, tel, phone, qq_num, email, 
     sex, parity, birthday, race, education, speciality, hobby, remark, created_at, updated_at
@@ -41,21 +54,24 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.octans.project.entity.entity.Employee">
-    insert into project_employee (id, dept_id, job_id, 
-      name, card_id, address, 
-      post_code, tel, phone, 
-      qq_num, email, sex, 
-      parity, birthday, race, 
-      education, speciality, hobby, 
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into project_employee (dept_id, job_id,
+      name, card_id, address,
+      post_code, tel, phone,
+      qq_num, email, sex,
+      parity, birthday, race,
+      education, speciality, hobby,
       remark, created_at, updated_at
       )
-    values (#{id,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER}, 
+    values ( #{deptId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER},
       #{name,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{postCode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{qqNum,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
       #{parity,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{race,jdbcType=VARCHAR}, 
       #{education,jdbcType=VARCHAR}, #{speciality,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      #{remark,jdbcType=VARCHAR}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
       )
   </insert>
   <insert id="insertSelective" parameterType="org.octans.project.entity.entity.Employee">
@@ -184,10 +200,10 @@
         #{remark,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null">
-        #{createdAt,jdbcType=TIMESTAMP},
+        CURRENT_TIMESTAMP,
       </if>
       <if test="updatedAt != null">
-        #{updatedAt,jdbcType=TIMESTAMP},
+        CURRENT_TIMESTAMP,
       </if>
     </trim>
   </insert>
@@ -248,12 +264,7 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createdAt != null">
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
+        updated_at = CURRENT_TIMESTAMP
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -281,4 +292,32 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByQuery"  resultMap="EmployeeResultMap">
+    select e.id,e.name, e.card_id, e.address,
+           e.phone,e.email, e.sex,
+           e.education,e.created_at,
+           d.name as dept_name,j.name as job_name from
+           (project_employee e INNER JOIN project_dept d on e.dept_id = d.id)
+           INNER JOIN project_job j on e.job_id = j.id
+            <where>
+              <if test="deptId != null">
+                dept_id =  #{deptId,jdbcType=INTEGER}
+              </if>
+              <if test="jobId != null">
+                AND job_id =  #{jobId,jdbcType=INTEGER}
+              </if>
+              <if test="sex != null">
+                AND sex =  #{sex,jdbcType=INTEGER}
+              </if>
+              <if test="cardId != null">
+                AND card_id =  #{cardId,jdbcType=VARCHAR}
+              </if>
+              <if test="phone != null">
+                AND phone =  #{phone,jdbcType=VARCHAR}
+              </if>
+              <if test="name != null">
+                AND name =  #{name,jdbcType=VARCHAR}
+              </if>
+            </where>
+  </select>
 </mapper>
