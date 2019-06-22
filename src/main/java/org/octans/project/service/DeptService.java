@@ -5,18 +5,38 @@ import org.octans.project.entity.entity.Dept;
 import java.util.List;
 
 public interface DeptService {
-    // 通过查询部门名称获取部门列表
+    /**
+     * 通过查询部门名称获取部门列表
+     * @param name
+     * @return
+     */
     List<Dept> getDeptList(String name);
 
-    // 添加部门
+    /**
+     * 添加部门
+     * @param dept
+     * @return
+     */
     boolean addDept(Dept dept);
 
-    // 编辑部门
+    /**
+     * 编辑部门
+     * @param dept
+     * @return
+     */
     boolean editDept(Dept dept);
 
-    // 获取部门信息
+    /**
+     * 获取部门信息
+     * @param id
+     * @return
+     */
     Dept getDept(Integer id);
 
-    // 删除部门
+    /**
+     * 删除部门
+     * @param id
+     * @return
+     */
     boolean deleteDept(Integer id);
 }
