@@ -14,6 +14,8 @@ public class UserDTO  extends ResponseDTO {
 
     private Integer status;
 
+    private String password;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
 
@@ -66,5 +68,13 @@ public class UserDTO  extends ResponseDTO {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -9,16 +9,18 @@ import org.octans.project.util.BeanMapper;
 import org.octans.project.util.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
+@CrossOrigin
 @Api(tags = "employeeController | 员工相关API")
 @RequestMapping("/employee")
 public class EmployeeController {

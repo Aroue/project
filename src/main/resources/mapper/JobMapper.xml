@@ -78,7 +78,7 @@
     <include refid="Base_Column_List" />
     from project_job
     <where>
-      <if test="name != null">
+      <if test="name != null and name != ''">
         name LIKE concat('%',#{name},'%')
       </if>
     </where>

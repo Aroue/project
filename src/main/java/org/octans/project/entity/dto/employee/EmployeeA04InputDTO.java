@@ -1,8 +1,9 @@
 package org.octans.project.entity.dto.employee;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
 import org.octans.project.util.dto.RequestDTO;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -61,7 +62,9 @@ public class EmployeeA04InputDTO extends RequestDTO {
 
     private String parity;
 
-    private DateTime birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
 
     private String race;
 
@@ -182,11 +185,11 @@ public class EmployeeA04InputDTO extends RequestDTO {
     }
 
     @ApiModelProperty(value = "出生日期", name = "birthday", dataType = "DateTime")
-    public DateTime getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(DateTime birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

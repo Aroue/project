@@ -118,10 +118,10 @@
     from project_notice n inner join project_user u
     on n.user_id = u.id
     <where>
-      <if test="title != null">
+      <if test="title != null and title != ''">
         title LIKE concat('%',#{title},'%')
       </if>
-      <if test="content != null">
+      <if test="content != null and content != ''">
        and content LIKE concat('%',#{content},'%')
       </if>
     </where>
