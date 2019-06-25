@@ -2,6 +2,7 @@ package org.octans.project.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.octans.project.entity.dto.deleteInputDTO;
 import org.octans.project.entity.dto.employee.*;
 import org.octans.project.entity.entity.Employee;
 import org.octans.project.service.EmployeeService;
@@ -44,10 +45,16 @@ public class EmployeeController {
         params.put("jobId",input.getJobId());
         params.put("phone",input.getPhone());
         params.put("sex",input.getSex());
-
+        params.put("offset",(input.getPage() - 1) * input.getPageSize());
+        params.put("pageSize",input.getPageSize());
+//        (page - 1) * pageSize, pageSize
         List<EmployeeA01DTO> employeeA01DTOList = employeeService.selectAll(params);
-        jsonResult.setData(employeeA01DTOList);
 
+        // 数据返回值
+        jsonResult.setTotalCount(employeeService.selectAllCount(params));
+        jsonResult.setPage(input.getPage());
+        jsonResult.setPageSize(input.getPageSize());
+        jsonResult.setData(employeeA01DTOList);
         return jsonResult;
     }
 
@@ -88,10 +95,10 @@ public class EmployeeController {
 
     @ApiOperation(value = "删除员工", notes = "删除员工", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = RequestMethod.POST, value = "/A05")
-    public JSONResult A05(@Valid @RequestBody EmployeeA03InputDTO input){
+    public JSONResult A05(@Valid @RequestBody deleteInputDTO input){
         JSONResult jsonResult = new JSONResult<>();
 
-        boolean success = employeeService.deleteEmployee(input.getId());
+        boolean success = employeeService.deleteEmployee(input.getIds());
         jsonResult.setMessage(success ? "删除成功" : "删除失败");
         return jsonResult;
     }

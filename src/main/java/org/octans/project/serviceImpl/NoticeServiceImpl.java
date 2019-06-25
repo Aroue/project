@@ -21,8 +21,13 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public List<NoticeA01DTO> getNoticeList(String title, String content) {
-        return noticeMapper.selectByQuery(title,content);
+    public List<NoticeA01DTO> getNoticeList(String title, String content,  int page, int pageSize) {
+        return noticeMapper.selectByQuery(title,content ,(page - 1) * pageSize, pageSize);
+    }
+
+    @Override
+    public int getNoticeListCount(String title, String content) {
+        return noticeMapper.selectByQueryCount(title,content);
     }
 
     @Override
@@ -36,7 +41,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public boolean deleteNotice(Integer id) {
+    public boolean deleteNotice(Integer[] id) {
         return noticeMapper.deleteByPrimaryKey(id) > 0;
     }
 

@@ -10,7 +10,14 @@ public interface JobService {
      * @param name
      * @return
      */
-    List<Job> getJobList(String name);
+    List<Job> getJobList(String name,int offset, int page_size);
+
+    /**
+     * 通过查询职位名称获取职位总数
+     * @param name
+     * @return
+     */
+    int getJobListCount(String name);
 
     /**
      * 添加职位
@@ -35,8 +42,8 @@ public interface JobService {
 
     /**
      * 删除职位
-     * @param id
+     * @param ids
      * @return
      */
-    boolean deleteJob(Integer id);
+    boolean deleteJob(Integer[] ids);
 }

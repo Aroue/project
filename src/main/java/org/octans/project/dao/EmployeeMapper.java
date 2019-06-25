@@ -1,5 +1,6 @@
 package org.octans.project.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.octans.project.entity.dto.employee.EmployeeA01DTO;
 import org.octans.project.entity.entity.Employee;
 
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface EmployeeMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer[] id);
 
     int insert(Employee record);
 
@@ -20,4 +21,6 @@ public interface EmployeeMapper {
     int updateByPrimaryKey(Employee record);
 
     List<EmployeeA01DTO> selectByQuery(HashMap<String, Object> params);
+
+    int selectByQueryCount(HashMap<String, Object> params);
 }

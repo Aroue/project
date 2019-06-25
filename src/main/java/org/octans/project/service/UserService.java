@@ -11,7 +11,7 @@ public interface UserService {
      * @param status
      * @return
      */
-    List<User> getAllUser(String loginName, Integer status);
+    List<User> getAllUser(String loginName, Integer status, int offset, int page_size);
 
     /**
      * 添加用户
@@ -37,10 +37,33 @@ public interface UserService {
 
     /**
      * 删除用户
-     * @param id
+     * @param ids
      * @return
      */
-    boolean deleteUser(Integer id);
+    boolean deleteUser(Integer[] ids);
+
+
+    /**
+     * 用户登陆
+     * @param userName
+     * @param password
+     * @return
+     */
+    User userLogin(String userName, String password);
+
+
+    /**
+     * 判断用户是否存在
+     * @param loginName
+     * @return
+     */
+    User userExist(String loginName);
+
+    /**
+     * 获取用户总数
+     * @return
+     */
+    int countDataCount(String loginName, Integer status);
 
 
 }

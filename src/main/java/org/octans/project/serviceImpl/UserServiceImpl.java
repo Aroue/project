@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUser(String loginName, Integer status) {
-        return userMapper.selectAll(loginName,status);
+    public List<User> getAllUser(String loginName, Integer status,  int page, int pageSize) {
+        return userMapper.selectAll(loginName,status,(page - 1) * pageSize, pageSize);
     }
 
     @Override
@@ -41,7 +41,22 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean deleteUser(Integer id) {
-        return userMapper.deleteByPrimaryKey(id) > 0;
+    public boolean deleteUser(Integer[] ids) {
+        return userMapper.deleteByPrimaryKey(ids) > 0;
+    }
+
+    @Override
+    public User userLogin(String userName, String password) {
+        return userMapper.userLogin(userName,password);
+    }
+
+    @Override
+    public User userExist(String loginName) {
+        return userMapper.userExist(loginName) ;
+    }
+
+    @Override
+    public int countDataCount(String loginName, Integer status) {
+        return userMapper.selectAllCount(loginName,status);
     }
 }

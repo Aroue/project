@@ -10,7 +10,14 @@ public interface DeptService {
      * @param name
      * @return
      */
-    List<Dept> getDeptList(String name);
+    List<Dept> getDeptList(String name,int offset, int page_size);
+
+    /**
+     * 通过查询部门名称获取部门总数
+     * @param name
+     * @return
+     */
+    int getDeptListCount(String name);
 
     /**
      * 添加部门
@@ -35,8 +42,8 @@ public interface DeptService {
 
     /**
      * 删除部门
-     * @param id
+     * @param ids
      * @return
      */
-    boolean deleteDept(Integer id);
+    boolean deleteDept(Integer[] ids);
 }

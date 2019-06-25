@@ -43,7 +43,7 @@ public class JSONResult<T> {
      * 分页大小
      */
     @ApiModelProperty(value = "分页大小", name = "pageSize", dataType = "Integer")
-    private Integer pageSize = 20;
+    private Integer pageSize = 10;
 
     /**
      * 总记录数

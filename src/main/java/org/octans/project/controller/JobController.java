@@ -2,6 +2,7 @@ package org.octans.project.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.octans.project.entity.dto.deleteInputDTO;
 import org.octans.project.entity.dto.job.JobA01InputDTO;
 import org.octans.project.entity.dto.job.JobA02InputDTO;
 import org.octans.project.entity.dto.job.JobA03InputDTO;
@@ -34,8 +35,15 @@ public class JobController {
     @RequestMapping(method = RequestMethod.GET, value = "/A01")
     public JSONResult A01(@Valid JobA01InputDTO input){
         JSONResult<List<Job>> jsonResult = new JSONResult<>();
-        List<Job> jobList = BeanMapper.mapList(jobService.getJobList(input.getName()),Job.class);
-        // 设置返回数据
+        if (input.getPage() == null || input.getPageSize() == null) {
+            input.setPage(1);
+            input.setPageSize(20);
+        }
+        List<Job> jobList = BeanMapper.mapList(jobService.getJobList(input.getName(),input.getPage(),input.getPageSize()),Job.class);
+        // 数据返回值
+        jsonResult.setTotalCount(jobService.getJobListCount(input.getName()));
+        jsonResult.setPage(input.getPage());
+        jsonResult.setPageSize(input.getPageSize());
         jsonResult.setData(jobList);
         return jsonResult;
     }
@@ -76,10 +84,10 @@ public class JobController {
 
     @ApiOperation(value = "删除职位", notes = "删除职位", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = RequestMethod.POST, value = "/A05")
-    public JSONResult A05(@Valid @RequestBody JobA04InputDTO input){
+    public JSONResult A05(@Valid @RequestBody deleteInputDTO input){
         JSONResult<Job> jsonResult = new JSONResult<>();
 
-        boolean success = jobService.deleteJob(input.getId());
+        boolean success = jobService.deleteJob(input.getIds());
         jsonResult.setMessage(success ? "删除成功" :  "删除失败");
         return jsonResult;
     }

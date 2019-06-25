@@ -6,7 +6,7 @@ import org.octans.project.entity.entity.Dept;
 import java.util.List;
 
 public interface DeptMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer[] id);
 
     int insert(Dept record);
 
@@ -18,5 +18,7 @@ public interface DeptMapper {
 
     int updateByPrimaryKey(Dept record);
 
-    List<Dept> selectByQuery(@Param("name")String name);
+    List<Dept> selectByQuery(@Param("name")String name, @Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
+
+    int selectByQueryCount(@Param("name")String name);
 }

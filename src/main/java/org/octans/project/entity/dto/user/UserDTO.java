@@ -77,4 +77,5 @@ public class UserDTO  extends ResponseDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

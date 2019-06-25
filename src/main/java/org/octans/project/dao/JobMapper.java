@@ -6,7 +6,7 @@ import org.octans.project.entity.entity.Job;
 import java.util.List;
 
 public interface JobMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer[] id);
 
     int insert(Job record);
 
@@ -18,5 +18,7 @@ public interface JobMapper {
 
     int updateByPrimaryKey(Job record);
 
-    List<Job> selectByQuery(@Param("name")String name);
+    List<Job> selectByQuery(@Param("name")String name, @Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
+
+    int selectByQueryCount(@Param("name")String name);
 }

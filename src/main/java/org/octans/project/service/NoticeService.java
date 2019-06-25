@@ -12,7 +12,15 @@ public interface NoticeService {
      * @param content
      * @return
      */
-    List<NoticeA01DTO> getNoticeList(String title,String content);
+    List<NoticeA01DTO> getNoticeList(String title,String content,int offset, int page_size);
+
+    /**
+     * 获取公告总数
+     * @param title
+     * @param content
+     * @return
+     */
+    int getNoticeListCount(String title,String content);
 
     /**
      * 添加公告
@@ -30,10 +38,10 @@ public interface NoticeService {
 
     /**
      * 删除公告
-     * @param id
+     * @param ids
      * @return
      */
-    boolean deleteNotice(Integer id);
+    boolean deleteNotice(Integer[] ids);
 
     /**
      * 编辑公告

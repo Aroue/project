@@ -15,6 +15,14 @@ public interface EmployeeService {
     List<EmployeeA01DTO> selectAll(HashMap<String, Object> params);
 
     /**
+     * 根据条件筛选出符合条件的全部员工数量
+     * @param params
+     * @return
+     */
+    int selectAllCount(HashMap<String, Object> params);
+
+
+    /**
      * 添加员工
      * @param employee
      * @return
@@ -30,10 +38,10 @@ public interface EmployeeService {
 
     /**
      * 删除员工
-     * @param id
+     * @param ids
      * @return
      */
-    boolean deleteEmployee(Integer id);
+    boolean deleteEmployee(Integer[] ids);
 
     /**
      * 编辑员工信息

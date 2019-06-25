@@ -18,5 +18,4 @@ public class UserA03InputDTO extends RequestDTO {
     public void setId(Integer id) {
         this.id = id;
     }
-
 }

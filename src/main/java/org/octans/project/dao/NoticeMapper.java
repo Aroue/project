@@ -7,7 +7,7 @@ import org.octans.project.entity.entity.Notice;
 import java.util.List;
 
 public interface NoticeMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer[] id);
 
     int insert(Notice record);
 
@@ -19,5 +19,7 @@ public interface NoticeMapper {
 
     int updateByPrimaryKey(Notice record);
 
-    List<NoticeA01DTO> selectByQuery(@Param("title")String title, @Param("content")String content);
+    List<NoticeA01DTO> selectByQuery(@Param("title")String title, @Param("content")String content, @Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
+
+    int selectByQueryCount(@Param("title")String title, @Param("content")String content);
 }

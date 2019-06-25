@@ -2,6 +2,7 @@ package org.octans.project.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.octans.project.entity.dto.deleteInputDTO;
 import org.octans.project.entity.dto.dept.DeptA01InputDTO;
 import org.octans.project.entity.dto.dept.DeptA02InputDTO;
 import org.octans.project.entity.dto.dept.DeptA03InputDTO;
@@ -34,8 +35,15 @@ public class DeptController {
     @RequestMapping(method = RequestMethod.GET, value = "/A01")
     public JSONResult A01(@Valid DeptA01InputDTO input){
         JSONResult<List<Dept>> jsonResult = new JSONResult<>();
-        List<Dept> deptList = BeanMapper.mapList(deptService.getDeptList(input.getName()),Dept.class);
-        // 设置返回数据
+        if (input.getPage() == null || input.getPageSize() == null) {
+            input.setPage(1);
+            input.setPageSize(20);
+        }
+        List<Dept> deptList = BeanMapper.mapList(deptService.getDeptList(input.getName(),input.getPage(),input.getPageSize()),Dept.class);
+        // 数据返回值
+        jsonResult.setTotalCount(deptService.getDeptListCount(input.getName()));
+        jsonResult.setPage(input.getPage());
+        jsonResult.setPageSize(input.getPageSize());
         jsonResult.setData(deptList);
         return jsonResult;
     }
@@ -76,10 +84,10 @@ public class DeptController {
 
     @ApiOperation(value = "删除部门", notes = "删除部门", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = RequestMethod.POST, value = "/A05")
-    public JSONResult A05(@Valid @RequestBody DeptA04InputDTO input){
+    public JSONResult A05(@Valid @RequestBody deleteInputDTO input){
         JSONResult<Dept> jsonResult = new JSONResult<>();
 
-        boolean success = deptService.deleteDept(input.getId());
+        boolean success = deptService.deleteDept(input.getIds());
         jsonResult.setMessage(success ? "删除成功" :  "删除失败");
         return jsonResult;
     }

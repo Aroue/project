@@ -22,8 +22,13 @@ public class DeptServiceImpl implements DeptService {
 
 
     @Override
-    public List<Dept> getDeptList(String name) {
-        return deptMapper.selectByQuery(name);
+    public List<Dept> getDeptList(String name,  int page, int pageSize) {
+        return deptMapper.selectByQuery(name,(page - 1) * pageSize, pageSize);
+    }
+
+    @Override
+    public int getDeptListCount(String name) {
+        return deptMapper.selectByQueryCount(name);
     }
 
     @Override
@@ -42,7 +47,7 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public boolean deleteDept(Integer id) {
+    public boolean deleteDept(Integer[] id) {
         return deptMapper.deleteByPrimaryKey(id) > 0;
     }
 }

@@ -17,9 +17,13 @@
     from project_job
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from project_job
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey"  parameterType="java.util.ArrayList">
+    delete
+    from project_job
+    where id in
+    <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="org.octans.project.entity.entity.Job">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -82,5 +86,17 @@
         name LIKE concat('%',#{name},'%')
       </if>
     </where>
+    LIMIT #{pageSize,jdbcType=INTEGER} OFFSET #{offset,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByQueryCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from project_job
+    <where>
+      <if test="name != null and name != ''">
+        name LIKE concat('%',#{name},'%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

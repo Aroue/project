@@ -2,16 +2,16 @@ DROP TABLE IF EXISTS `project_user`;
 CREATE TABLE `project_user`
 (
     `id`              int(11)      NOT NULL AUTO_INCREMENT,
-    `login_name`      varchar(20)  NOT NULL COMMENT '登录名.',
+    `login_name`      varchar(20)  NOT NULL UNIQUE COMMENT '登录名.',
     `user_name`       varchar(20)  NOT NULL COMMENT '用户名.',
     `password`        varchar(32)  NOT NULL COMMENT '密码',
     `status`          int(11)      NOT NULL COMMENT '权限状态（1管理员，2用户）',
     `created_at`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `unique_login_name` (`login_name`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT ='用户表';
-
 
 
 DROP TABLE IF EXISTS `project_dept`;
@@ -58,7 +58,9 @@ CREATE TABLE `project_employee`
     `remark`          varchar(500) COMMENT '备注.',
     `created_at`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`dept_id`) REFERENCES project_dept(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`job_id`) REFERENCES project_job(`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT ='员工表';
 
@@ -73,8 +75,12 @@ CREATE TABLE `project_notice`
     `content`         varchar(50)  NOT NULL COMMENT '公告内容' ,
     `created_at`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES project_user(`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8 COMMENT ='员工表';
+  DEFAULT CHARSET = utf8 COMMENT ='公告表';
 
+
+# 启动外键约束.
+SET FOREIGN_KEY_CHECKS = 1;
 

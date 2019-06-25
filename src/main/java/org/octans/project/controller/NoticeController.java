@@ -2,6 +2,7 @@ package org.octans.project.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.octans.project.entity.dto.deleteInputDTO;
 import org.octans.project.entity.dto.notice.*;
 import org.octans.project.entity.entity.Notice;
 import org.octans.project.service.NoticeService;
@@ -31,8 +32,15 @@ public class NoticeController {
     @RequestMapping(method = RequestMethod.GET, value = "/A01")
     public JSONResult A01(@Valid NoticeA01InputDTO input){
         JSONResult<List<NoticeA01DTO>> jsonResult = new JSONResult<>();
-        List<NoticeA01DTO> deptList = BeanMapper.mapList(noticeService.getNoticeList(input.getTitle(),input.getContent()),NoticeA01DTO.class);
-        // 设置返回数据
+        if (input.getPage() == null || input.getPageSize() == null) {
+            input.setPage(1);
+            input.setPageSize(20);
+        }
+        List<NoticeA01DTO> deptList = BeanMapper.mapList(noticeService.getNoticeList(input.getTitle(),input.getContent(),input.getPage(),input.getPageSize()),NoticeA01DTO.class);
+        // 数据返回值
+        jsonResult.setTotalCount(noticeService.getNoticeListCount(input.getTitle(),input.getContent()));
+        jsonResult.setPage(input.getPage());
+        jsonResult.setPageSize(input.getPageSize());
         jsonResult.setData(deptList);
         return jsonResult;
     }
@@ -73,10 +81,10 @@ public class NoticeController {
 
     @ApiOperation(value = "删除公告", notes = "删除公告", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(method = RequestMethod.POST, value = "/A05")
-    public JSONResult A05(@Valid @RequestBody NoticeA03InputDTO input){
+    public JSONResult A05(@Valid @RequestBody deleteInputDTO input){
         JSONResult jsonResult = new JSONResult<>();
 
-        boolean success  =  noticeService.deleteNotice(input.getId());
+        boolean success  =  noticeService.deleteNotice(input.getIds());
 
         jsonResult.setMessage(success ? "删除成功" : "删除失败");
         return jsonResult;

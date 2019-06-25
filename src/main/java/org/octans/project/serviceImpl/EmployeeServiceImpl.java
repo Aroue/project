@@ -27,6 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public int selectAllCount(HashMap<String, Object> params) {
+        return employeeMapper.selectByQueryCount(params);
+    }
+
+    @Override
     public boolean addEmployee(Employee employee) {
         return employeeMapper.insert(employee) > 0;
     }
@@ -37,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean deleteEmployee(Integer id) {
+    public boolean deleteEmployee(Integer[] id) {
         return employeeMapper.deleteByPrimaryKey(id) > 0;
     }
 

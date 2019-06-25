@@ -1,323 +1,354 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.octans.project.dao.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="org.octans.project.entity.entity.Employee">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="dept_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="job_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="card_id" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="post_code" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="tel" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="qq_num" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="sex" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="parity" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="race" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="education" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="speciality" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="hobby" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-    </constructor>
-  </resultMap>
-  <resultMap id="EmployeeResultMap" type="org.octans.project.entity.dto.employee.EmployeeA01DTO">
-      <id property="id" column="id"/>
-      <result column="name" property="name" />
-      <result column="job_name" property="jobName" />
-      <result column="dept_name" property="deptName" />
-      <result column="card_id" property="cardId" />
-      <result column="address" property="address" />
-      <result column="phone" property="phone" />
-      <result column="email" property="email" />
-      <result column="sex" property="sex" />
-      <result column="education" property="education"/>
-      <result column="created_at" property="createdAt" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, dept_id, job_id, name, card_id, address, post_code, tel, phone, qq_num, email, 
+    <resultMap id="BaseResultMap" type="org.octans.project.entity.entity.Employee">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="dept_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="job_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="card_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="post_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="tel" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="qq_num" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="sex" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="parity" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="race" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="education" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="speciality" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="hobby" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="EmployeeResultMap" type="org.octans.project.entity.dto.employee.EmployeeA01DTO">
+        <id property="id" column="id"/>
+        <result column="name" property="name"/>
+        <result column="job_name" property="jobName"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="card_id" property="cardId"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="sex" property="sex"/>
+        <result column="education" property="education"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, dept_id, job_id, name, card_id, address, post_code, tel, phone, qq_num, email,
     sex, parity, birthday, race, education, speciality, hobby, remark, created_at, updated_at
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from project_employee
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from project_employee
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.octans.project.entity.entity.Employee">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into project_employee (dept_id, job_id,
-      name, card_id, address,
-      post_code, tel, phone,
-      qq_num, email, sex,
-      parity, birthday, race,
-      education, speciality, hobby,
-      remark, created_at, updated_at
-      )
-    values ( #{deptId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER},
-      #{name,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{postCode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{qqNum,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{parity,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{race,jdbcType=VARCHAR}, 
-      #{education,jdbcType=VARCHAR}, #{speciality,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="org.octans.project.entity.entity.Employee">
-    insert into project_employee
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="deptId != null">
-        dept_id,
-      </if>
-      <if test="jobId != null">
-        job_id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="cardId != null">
-        card_id,
-      </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="postCode != null">
-        post_code,
-      </if>
-      <if test="tel != null">
-        tel,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="qqNum != null">
-        qq_num,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="parity != null">
-        parity,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="race != null">
-        race,
-      </if>
-      <if test="education != null">
-        education,
-      </if>
-      <if test="speciality != null">
-        speciality,
-      </if>
-      <if test="hobby != null">
-        hobby,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="createdAt != null">
-        created_at,
-      </if>
-      <if test="updatedAt != null">
-        updated_at,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="deptId != null">
-        #{deptId,jdbcType=INTEGER},
-      </if>
-      <if test="jobId != null">
-        #{jobId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="cardId != null">
-        #{cardId,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="postCode != null">
-        #{postCode,jdbcType=VARCHAR},
-      </if>
-      <if test="tel != null">
-        #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="qqNum != null">
-        #{qqNum,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="parity != null">
-        #{parity,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="race != null">
-        #{race,jdbcType=VARCHAR},
-      </if>
-      <if test="education != null">
-        #{education,jdbcType=VARCHAR},
-      </if>
-      <if test="speciality != null">
-        #{speciality,jdbcType=VARCHAR},
-      </if>
-      <if test="hobby != null">
-        #{hobby,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createdAt != null">
-        CURRENT_TIMESTAMP,
-      </if>
-      <if test="updatedAt != null">
-        CURRENT_TIMESTAMP,
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.octans.project.entity.entity.Employee">
-    update project_employee
-    <set>
-      <if test="deptId != null">
-        dept_id = #{deptId,jdbcType=INTEGER},
-      </if>
-      <if test="jobId != null">
-        job_id = #{jobId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="cardId != null">
-        card_id = #{cardId,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="postCode != null">
-        post_code = #{postCode,jdbcType=VARCHAR},
-      </if>
-      <if test="tel != null">
-        tel = #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="qqNum != null">
-        qq_num = #{qqNum,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="parity != null">
-        parity = #{parity,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="race != null">
-        race = #{race,jdbcType=VARCHAR},
-      </if>
-      <if test="education != null">
-        education = #{education,jdbcType=VARCHAR},
-      </if>
-      <if test="speciality != null">
-        speciality = #{speciality,jdbcType=VARCHAR},
-      </if>
-      <if test="hobby != null">
-        hobby = #{hobby,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-        updated_at = CURRENT_TIMESTAMP
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.octans.project.entity.entity.Employee">
-    update project_employee
-    set dept_id = #{deptId,jdbcType=INTEGER},
-      job_id = #{jobId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      card_id = #{cardId,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      post_code = #{postCode,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      qq_num = #{qqNum,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      parity = #{parity,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      race = #{race,jdbcType=VARCHAR},
-      education = #{education,jdbcType=VARCHAR},
-      speciality = #{speciality,jdbcType=VARCHAR},
-      hobby = #{hobby,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByQuery"  resultMap="EmployeeResultMap">
-    select e.id,e.name, e.card_id, e.address,
-           e.phone,e.email, e.sex,
-           e.education,e.created_at,
-           d.name as dept_name,j.name as job_name from
-           (project_employee e INNER JOIN project_dept d on e.dept_id = d.id)
-           INNER JOIN project_job j on e.job_id = j.id
-            <where>
-              <if test="deptId != null">
-                dept_id =  #{deptId,jdbcType=INTEGER}
-              </if>
-              <if test="jobId != null">
-                AND job_id =  #{jobId,jdbcType=INTEGER}
-              </if>
-              <if test="sex != null">
-                AND sex =  #{sex,jdbcType=INTEGER}
-              </if>
-              <if test="cardId != null and cardId != ''">
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from project_employee
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.util.ArrayList">
+        delete
+        from project_employee
+        where id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="org.octans.project.entity.entity.Employee">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into project_employee (dept_id, job_id,
+        name, card_id, address,
+        post_code, tel, phone,
+        qq_num, email, sex,
+        parity, birthday, race,
+        education, speciality, hobby,
+        remark, created_at, updated_at
+        )
+        values ( #{deptId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+        #{postCode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{qqNum,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
+        #{parity,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{race,jdbcType=VARCHAR},
+        #{education,jdbcType=VARCHAR}, #{speciality,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="org.octans.project.entity.entity.Employee">
+        insert into project_employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="jobId != null">
+                job_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="cardId != null">
+                card_id,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="postCode != null">
+                post_code,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="qqNum != null">
+                qq_num,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="parity != null">
+                parity,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="race != null">
+                race,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="speciality != null">
+                speciality,
+            </if>
+            <if test="hobby != null">
+                hobby,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="deptId != null">
+                #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="jobId != null">
+                #{jobId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cardId != null">
+                #{cardId,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="postCode != null">
+                #{postCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNum != null">
+                #{qqNum,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="parity != null">
+                #{parity,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="race != null">
+                #{race,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="speciality != null">
+                #{speciality,jdbcType=VARCHAR},
+            </if>
+            <if test="hobby != null">
+                #{hobby,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                CURRENT_TIMESTAMP,
+            </if>
+            <if test="updatedAt != null">
+                CURRENT_TIMESTAMP,
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.octans.project.entity.entity.Employee">
+        update project_employee
+        <set>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="jobId != null">
+                job_id = #{jobId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cardId != null">
+                card_id = #{cardId,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="postCode != null">
+                post_code = #{postCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNum != null">
+                qq_num = #{qqNum,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="parity != null">
+                parity = #{parity,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="race != null">
+                race = #{race,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="speciality != null">
+                speciality = #{speciality,jdbcType=VARCHAR},
+            </if>
+            <if test="hobby != null">
+                hobby = #{hobby,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            updated_at = CURRENT_TIMESTAMP
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.octans.project.entity.entity.Employee">
+        update project_employee
+        set dept_id    = #{deptId,jdbcType=INTEGER},
+            job_id     = #{jobId,jdbcType=INTEGER},
+            name       = #{name,jdbcType=VARCHAR},
+            card_id    = #{cardId,jdbcType=VARCHAR},
+            address    = #{address,jdbcType=VARCHAR},
+            post_code  = #{postCode,jdbcType=VARCHAR},
+            tel        = #{tel,jdbcType=VARCHAR},
+            phone      = #{phone,jdbcType=VARCHAR},
+            qq_num     = #{qqNum,jdbcType=VARCHAR},
+            email      = #{email,jdbcType=VARCHAR},
+            sex        = #{sex,jdbcType=INTEGER},
+            parity     = #{parity,jdbcType=VARCHAR},
+            birthday   = #{birthday,jdbcType=TIMESTAMP},
+            race       = #{race,jdbcType=VARCHAR},
+            education  = #{education,jdbcType=VARCHAR},
+            speciality = #{speciality,jdbcType=VARCHAR},
+            hobby      = #{hobby,jdbcType=VARCHAR},
+            remark     = #{remark,jdbcType=VARCHAR},
+            created_at = #{createdAt,jdbcType=TIMESTAMP},
+            updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByQuery" resultMap="EmployeeResultMap">
+        select e.id,e.name, e.card_id, e.address,
+        e.phone,e.email, e.sex,
+        e.education,e.created_at,
+        d.name as dept_name,j.name as job_name from
+        (project_employee e left JOIN project_dept d on e.dept_id = d.id)
+        left JOIN project_job j on e.job_id = j.id
+        <where>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=INTEGER}
+            </if>
+            <if test="jobId != null">
+                AND job_id = #{jobId,jdbcType=INTEGER}
+            </if>
+            <if test="sex != null">
+                AND sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="cardId != null and cardId != ''">
                 AND card_id LIKE concat('%',#{cardId},'%')
-              </if>
-              <if test="phone != null and phone != ''">
+            </if>
+            <if test="phone != null and phone != ''">
                 AND phone LIKE concat('%',#{phone},'%')
-              </if>
-              <if test="name != null and name != ''">
+            </if>
+            <if test="name != null and name != ''">
                 AND e.name LIKE concat('%',#{name},'%')
-              </if>
-            </where>
-  </select>
+            </if>
+        </where>
+        LIMIT #{pageSize,jdbcType=INTEGER} OFFSET #{offset,jdbcType=INTEGER}
+    </select>
+    <select id="selectByQueryCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from
+        (project_employee e left JOIN project_dept d on e.dept_id = d.id)
+        left JOIN project_job j on e.job_id = j.id
+        <where>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=INTEGER}
+            </if>
+            <if test="jobId != null">
+                AND job_id = #{jobId,jdbcType=INTEGER}
+            </if>
+            <if test="sex != null">
+                AND sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="cardId != null and cardId != ''">
+                AND card_id LIKE concat('%',#{cardId},'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                AND phone LIKE concat('%',#{phone},'%')
+            </if>
+            <if test="name != null and name != ''">
+                AND e.name LIKE concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
 </mapper>

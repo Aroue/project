@@ -20,8 +20,13 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<Job> getJobList(String name) {
-        return jobMapper.selectByQuery(name);
+    public List<Job> getJobList(String name,  int page, int pageSize) {
+        return jobMapper.selectByQuery(name,(page - 1) * pageSize, pageSize);
+    }
+
+    @Override
+    public int getJobListCount(String name) {
+        return jobMapper.selectByQueryCount(name);
     }
 
     @Override
@@ -40,7 +45,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public boolean deleteJob(Integer id) {
+    public boolean deleteJob(Integer[] id) {
         return jobMapper.deleteByPrimaryKey(id) > 0;
     }
 }
